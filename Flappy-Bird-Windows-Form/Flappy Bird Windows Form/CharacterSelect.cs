@@ -33,12 +33,5 @@ namespace Flappy_Bird_Windows_Form
             OpenDifficultySelect("Bird2"); // Truyền thông tin nhân vật đã chọn
         }
 
-        private void OpenDifficultySelect(string selectedCharacter)
-        {
-            // Mở giao diện chọn độ khó và truyền nhân vật đã chọn
-            DifficultySelect difficultyForm = new DifficultySelect(selectedCharacter);
-            difficultyForm.Show();
-            this.Hide();
-        }
     }
 }
