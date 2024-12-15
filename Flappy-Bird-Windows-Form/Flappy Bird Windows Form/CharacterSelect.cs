@@ -15,9 +15,7 @@ namespace Flappy_Bird_Windows_Form
         public CharacterSelect()
         {
             InitializeComponent();
-
         }
-
         private void CharacterSelect_Load(object sender, EventArgs e)
         {
             // Initialize any dynamic content or setup logic here.
