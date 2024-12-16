@@ -15,54 +15,49 @@ namespace Flappy_Bird_Windows_Form
         public CharacterSelect()
         {
             InitializeComponent();
-            textBox1.Click += PanelMode1_Click;
-            textBox2.Click += PanelMode2_Click;
-
-        }
-        private void PanelMode1_Click(object sender, EventArgs e)
-        {
-            //Move to Mode 1 screen
-            MessageBox.Show("You have chosen Mode 1");
-            CharacterSelect mode1Form = new CharacterSelect();
-            mode1Form.Show();
-            this.Hide();
-
-        }
-        private void PanelMode2_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("You have chosen Mode 2");
-            CharacterSelect mode2Form = new CharacterSelect();
-            mode2Form.Show();
-            this.Hide();
         }
 
         private void CharacterSelect_Load(object sender, EventArgs e)
         {
-            // Initialize any dynamic content or setup logic here.
-            MessageBox.Show(" Choose the mode!");
+            // Gán text mặc định cho TextBox
+            textBox1.Text = "Mode 1";
+            textBox2.Text = "Mode 2";
+
+            // Gắn sự kiện Click cho các TextBox
+            textBox1.Click += TextBox1_Click;
+            textBox2.Click += TextBox2_Click;
         }
-        private void Bird1_Click(object sender, EventArgs e)
+
+        private void TextBox1_Click(object sender, EventArgs e)
         {
-            OpenDifficultySelect("Bird1"); // Truyền thông tin nhân vật đã chọn
+            HandleModeSelection("Mode 1");
         }
 
-        private void Bird2_Click(object sender, EventArgs e)
+        private void TextBox2_Click(object sender, EventArgs e)
         {
-            OpenDifficultySelect("Bird2"); // Truyền thông tin nhân vật đã chọn
+            HandleModeSelection("Mode 2");
         }
 
-        private void OpenDifficultySelect(string selectedCharacter)
+        private void HandleModeSelection(string mode)
         {
-            // Mở giao diện chọn độ khó và truyền nhân vật đã chọn
-            DifficultySelect difficultyForm = new DifficultySelect(selectedCharacter);
-            difficultyForm.Show();
-            this.Hide();
+            // Hiển thị thông báo
+            MessageBox.Show($"You have chosen {mode}!");
+
+            // Chuyển sang màn hình tiếp theo
+            OpenDifficultySelect(mode);
         }
 
-        private void Background2_Click(object sender, EventArgs e)
+        private void OpenDifficultySelect(string mode)
         {
-
+            // Mở màn hình tiếp theo và truyền thông tin chế độ
+            DifficultySelect difficultySelectForm = new DifficultySelect(mode);
+            difficultySelectForm.Show();
+            this.Hide(); // Ẩn form hiện tại
         }
-
+        private void Background3_Click(object sender, EventArgs e)
+        {
+            // Thêm logic xử lý tại đây
+            MessageBox.Show("Background3 clicked!");
+        }
     }
 }

@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,43 +19,91 @@ namespace Flappy_Bird_Windows_Form
         int score = 0;
         int pipeGap = 150; // Default gap size for pipes
 
+        private Button btnRestart;
         public string GameMode { get; private set; } // Game mode passed from MainMenu
         public string SelectedCharacter { get; private set; } // Nhân vật được chọn
 
-        private Button btnRestart; // Declare the restart button
-
         public Form1(string character, string mode)
         {
+            // Add this try-catch block for debugging resource loading
+            try
+            {
+                var resourceManager = new ResourceManager("Flappy_Bird_Windows_Form.Form1", Assembly.GetExecutingAssembly());
+                var resourceValue = resourceManager.GetString("YourResourceKey"); // Replace with an actual key if available
+            }
+            catch (MissingManifestResourceException ex)
+            {
+                MessageBox.Show("Resource loading failed: " + ex.Message);
+            }
             InitializeComponent();
             SelectedCharacter = character; // Lưu thông tin nhân vật
             GameMode = mode; // Lưu thông tin chế độ
             SetGameMode(GameMode);
+            SetPipeDesign(GameMode);  // Thiết lập thiết kế ống theo chế độ game
             InitializeRestartButton(); // Initialize the restart button
+
+            // Set up game timer
+            gameTimer = new Timer();
+            gameTimer.Interval = 20; // Game update interval
+            gameTimer.Tick += new EventHandler(gameTimerEvent);
+            gameTimer.Start(); // Start the game timer
         }
 
         private void InitializeRestartButton()
         {
-            this.btnRestart = new System.Windows.Forms.Button(); // Initialize the button
-            this.SuspendLayout();
-
-            // 
-            // btnRestart
-            // 
-            this.btnRestart.Location = new System.Drawing.Point(350, 300); // Example position
-            this.btnRestart.Name = "btnRestart";
-            this.btnRestart.Size = new System.Drawing.Size(100, 50); // Size of the button
-            this.btnRestart.TabIndex = 0;
-            this.btnRestart.Text = "Restart";
-            this.btnRestart.UseVisualStyleBackColor = true;
-            this.btnRestart.Visible = false; // Initially hidden
-            this.btnRestart.Click += new System.EventHandler(this.btnRestart_Click); // Button click event
-
-            // Add the button to the form's controls
-            this.Controls.Add(this.btnRestart);
-
-            this.ResumeLayout(false);
+            btnRestart = new Button
+            {
+                Location = new Point(350, 300),
+                Name = "btnRestart",
+                Size = new Size(100, 50),
+                TabIndex = 0,
+                Text = "Restart",
+                UseVisualStyleBackColor = true,
+                Visible = false // Initially hidden
+            };
+            btnRestart.Click += btnRestart_Click;
+            Controls.Add(btnRestart);
         }
+        private void CreatePipes()
+        {
+            flappyBird = new PictureBox
+            {
+                Size = new Size(50, 50),
+                Location = new Point(100, 200),
+                BackColor = Color.Yellow
+            };
+            pipeTop = new PictureBox
+            {
+                Size = new Size(80, 200),
+                Location = new Point(400, 0),
+                BackColor = Color.Green
+            };
+            pipeBottom = new PictureBox
+            {
+                Size = new Size(80, 200),
+                Location = new Point(400, 400),
+                BackColor = Color.Green
+            };
+            ground = new PictureBox
+            {
+                Size = new Size(ClientSize.Width, 50),
+                Location = new Point(0, ClientSize.Height - 50),
+                BackColor = Color.Brown
+            };
+            scoreText = new Label
+            {
+                Text = "Score: 0",
+                Font = new Font("Arial", 16, FontStyle.Bold),
+                Location = new Point(10, 10),
+                AutoSize = true
+            };
 
+            Controls.Add(flappyBird);
+            Controls.Add(pipeTop);
+            Controls.Add(pipeBottom);
+            Controls.Add(ground);
+            Controls.Add(scoreText);
+        }
         private void SetGameMode(string mode)
         {
             // Adjust settings based on the selected game mode
@@ -73,59 +123,29 @@ namespace Flappy_Bird_Windows_Form
                     break;
             }
         }
-        private void CreatePipe()
-        {
-            int pipeHeight = new Random().Next(100, this.ClientSize.Height - 100);  // Vị trí ngẫu nhiên cho ống
-            pipeBottom.Top = pipeHeight;
-            pipeTop.Top = pipeHeight - pipeGap;
-
-            pipeBottom.Left = this.ClientSize.Width;  // Đặt ống vào phía bên phải
-            pipeTop.Left = this.ClientSize.Width;
-        }
         private void SetPipeDesign(string mode)
         {
+            Color pipeColor;
+
             switch (mode)
             {
-                case "Normal":
-                    pipeBottom.BackColor = Color.Green;
-                    pipeTop.BackColor = Color.Green;
-                    break;
                 case "Hard":
-                    pipeBottom.BackColor = Color.DarkGreen;
-                    pipeTop.BackColor = Color.DarkGreen;
+                    pipeColor = Color.DarkGreen;
                     break;
                 case "Extreme":
-                    pipeBottom.BackColor = Color.Orange;
-                    pipeTop.BackColor = Color.Orange;
-                    // Thêm hiệu ứng phát sáng hoặc hoạt hình cho ống
+                    pipeColor = Color.Orange;
+                    break;
+                default:
+                    pipeColor = Color.Green;
                     break;
             }
+
+            pipeBottom.BackColor = pipeColor;
+            pipeTop.BackColor = pipeColor;
         }
-        private void UpdateScore()
-        {
-            score++;
-            scoreText.Text = "Score: " + score;
-        }
-        private void gamekeyisdown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Space)
-            {
-                gravity = -8;
-            }
-        }
-
-        private void gamekeyisup(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Space)
-            {
-                gravity = 10;
-            }
-        }
-
-
-
-
-
+     
+        
+      
 
         private void gameTimerEvent(object sender, EventArgs e)
         {
@@ -165,13 +185,19 @@ namespace Flappy_Bird_Windows_Form
         private void ResetPipes()
         {
             // Reset pipe positions randomly
-            pipeBottom.Left = this.ClientSize.Width;
-            pipeBottom.Top = new Random().Next(pipeGap, this.ClientSize.Height - ground.Height);
+            pipeBottom.Left = ClientSize.Width;
+            pipeBottom.Top = new Random().Next(pipeGap,ClientSize.Height - ground.Height);
 
-            pipeTop.Left = this.ClientSize.Width;
+            pipeTop.Left = ClientSize.Width;
             pipeTop.Top = pipeBottom.Top - pipeGap;
         }
-
+        private void UpdateScore()
+        {
+            score++;
+            scoreText.Text = "Score: " + score;
+        }
+    
+      
         private void UpdateDifficulty()
         {
             // Increase difficulty based on score milestones
@@ -235,7 +261,21 @@ namespace Flappy_Bird_Windows_Form
             scoreText.Text = "Score: " + score;
             gameTimer.Start();
         }
+        private void gamekeyisdown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                gravity = -8;
+            }
+        }
 
+        private void gamekeyisup(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                gravity = 10;
+            }
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
 
