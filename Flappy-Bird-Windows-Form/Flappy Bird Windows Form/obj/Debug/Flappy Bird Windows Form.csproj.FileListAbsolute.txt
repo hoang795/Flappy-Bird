@@ -20,3 +20,15 @@ C:\Users\Admin\Downloads\Flappy-Bird-Windows-Form\Flappy Bird Windows Form\obj\D
 C:\Users\Admin\Downloads\Flappy-Bird-Windows-Form\Flappy Bird Windows Form\obj\Debug\Flappy Bird Windows Form.pdb
 C:\Users\Admin\Downloads\Flappy-Bird-Windows-Form\Flappy Bird Windows Form\obj\Debug\Flappy_Bird_Windows_Form.CharacterSelect.resources
 C:\Users\Admin\Downloads\Flappy-Bird-Windows-Form\Flappy Bird Windows Form\obj\Debug\Flappy_Bird_Windows_Form.DifficultySelect.resources
+C:\Users\HP\source\repos\test flappy\Flappy-Bird\Flappy-Bird-Windows-Form\Flappy Bird Windows Form\bin\Debug\Flappy Bird Windows Form.exe.config
+C:\Users\HP\source\repos\test flappy\Flappy-Bird\Flappy-Bird-Windows-Form\Flappy Bird Windows Form\bin\Debug\Flappy Bird Windows Form.exe
+C:\Users\HP\source\repos\test flappy\Flappy-Bird\Flappy-Bird-Windows-Form\Flappy Bird Windows Form\bin\Debug\Flappy Bird Windows Form.pdb
+C:\Users\HP\source\repos\test flappy\Flappy-Bird\Flappy-Bird-Windows-Form\Flappy Bird Windows Form\obj\Debug\Flappy Bird Windows Form.csproj.AssemblyReference.cache
+C:\Users\HP\source\repos\test flappy\Flappy-Bird\Flappy-Bird-Windows-Form\Flappy Bird Windows Form\obj\Debug\Flappy_Bird_Windows_Form.CharacterSelect.resources
+C:\Users\HP\source\repos\test flappy\Flappy-Bird\Flappy-Bird-Windows-Form\Flappy Bird Windows Form\obj\Debug\Flappy_Bird_Windows_Form.DifficultySelect.resources
+C:\Users\HP\source\repos\test flappy\Flappy-Bird\Flappy-Bird-Windows-Form\Flappy Bird Windows Form\obj\Debug\Flappy_Bird_Windows_Form.MainMenu.resources
+C:\Users\HP\source\repos\test flappy\Flappy-Bird\Flappy-Bird-Windows-Form\Flappy Bird Windows Form\obj\Debug\Flappy_Bird_Windows_Form.Properties.Resources.resources
+C:\Users\HP\source\repos\test flappy\Flappy-Bird\Flappy-Bird-Windows-Form\Flappy Bird Windows Form\obj\Debug\Flappy Bird Windows Form.csproj.GenerateResource.cache
+C:\Users\HP\source\repos\test flappy\Flappy-Bird\Flappy-Bird-Windows-Form\Flappy Bird Windows Form\obj\Debug\Flappy Bird Windows Form.csproj.CoreCompileInputs.cache
+C:\Users\HP\source\repos\test flappy\Flappy-Bird\Flappy-Bird-Windows-Form\Flappy Bird Windows Form\obj\Debug\Flappy Bird Windows Form.exe
+C:\Users\HP\source\repos\test flappy\Flappy-Bird\Flappy-Bird-Windows-Form\Flappy Bird Windows Form\obj\Debug\Flappy Bird Windows Form.pdb
