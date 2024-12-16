@@ -76,13 +76,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="..\..\..\..\..\..\Downloads\CharacterSelect.cs">
+    <Compile Include="CharacterSelect.cs">
       <SubType>Form</SubType>
-      <Link>CharacterSelect.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\..\..\..\Downloads\CharacterSelect.Designer.cs">
+    <Compile Include="CharacterSelect.Designer.cs">
       <DependentUpon>CharacterSelect.cs</DependentUpon>
-      <Link>CharacterSelect.Designer.cs</Link>
     </Compile>
     <Compile Include="MainMenu.cs">
       <SubType>Form</SubType>
@@ -95,9 +93,8 @@
     <AdditionalFiles Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </AdditionalFiles>
-    <EmbeddedResource Include="..\..\..\..\..\..\Downloads\CharacterSelect.resx">
+    <EmbeddedResource Include="CharacterSelect.resx">
       <DependentUpon>CharacterSelect.cs</DependentUpon>
-      <Link>CharacterSelect.resx</Link>
     </EmbeddedResource>
     <EmbeddedResource Include="DifficultySelect.resx">
       <DependentUpon>DifficultySelect.cs</DependentUpon>
